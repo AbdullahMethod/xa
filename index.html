@@ -1,0 +1,725 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Abdullah Coded Preview</title><style>/* CSS here */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 24px;
+  background: #f0f8ff;
+  color: #333;
+  line-height: 1.6;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+h1 {
+  color: #2196F3;
+  border-bottom: 2px solid #00BCD4;
+  padding-bottom: 10px;
+}
+ul {
+  padding-left: 20px;
+}
+li {
+  margin-bottom: 8px;
+}</style></head><body><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Texas Educator Certificate Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&family=Tinos:wght@400;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0c1e42 0%, #1a3a6c 50%, #0c1e42 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .cert-font {
+            font-family: 'Tinos', serif;
+        }
+        .cert-title {
+            font-family: 'Cinzel', serif;
+            color: #8B0000;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        .cert-name {
+            font-family: 'Tinos', serif;
+            font-weight: 700;
+        }
+        
+        /* Amazing 3D Certificate Styling */
+        .certificate-3d {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transform: rotateY(-5deg) rotateX(3deg);
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                -20px 20px 40px rgba(0, 0, 0, 0.4),
+                inset 0 0 60px rgba(255, 255, 255, 0.1),
+                0 0 50px rgba(139, 0, 0, 0.2);
+            border: 15px solid transparent;
+            background: 
+                linear-gradient(white, white) padding-box,
+                linear-gradient(45deg, #8B0000, #1a3a6c, #8B0000) border-box;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .certificate-3d:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+            box-shadow: 
+                -10px 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 0 80px rgba(255, 255, 255, 0.15),
+                0 0 60px rgba(139, 0, 0, 0.3);
+        }
+        
+        /* Embossed effect for text */
+        .embossed {
+            text-shadow: 
+                1px 1px 0px rgba(255,255,255,0.8),
+                -1px -1px 0px rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+        }
+        
+        /* Floating particles background */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(139, 0, 0, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
+        
+        /* Golden seal effect */
+        .golden-seal {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, #ffd700 0%, #daa520 70%, #b8860b 100%);
+            border-radius: 50%;
+            right: 40px;
+            bottom: 40px;
+            opacity: 0.9;
+            transform: rotate(15deg);
+            box-shadow: 
+                0 0 30px rgba(255, 215, 0, 0.5),
+                inset 0 0 30px rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            overflow: hidden;
+        }
+        
+        .golden-seal::before {
+            content: '';
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border: 3px dashed #b8860b;
+            border-radius: 50%;
+        }
+        
+        .golden-seal::after {
+            content: 'TEXAS';
+            position: absolute;
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 24px;
+            color: #8B0000;
+            letter-spacing: 3px;
+        }
+        
+        /* Shimmer effect */
+        .shimmer {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 3s infinite;
+            z-index: 2;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* 3D Control buttons */
+        .btn-3d {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 0 rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .btn-3d:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-3d:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-3d::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.2) 100%);
+            z-index: 1;
+        }
+        
+        /* Animated input fields */
+        .input-3d {
+            transition: all 0.3s ease;
+            border: 2px solid #cbd5e0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .input-3d:focus {
+            border-color: #8B0000;
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1), 0 10px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Glowing title */
+        .glow-title {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: glow-pulse 2s infinite alternate;
+        }
+        
+        @keyframes glow-pulse {
+            from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 25px rgba(255, 255, 255, 0.7), 0 0 35px rgba(255, 255, 255, 0.5); }
+        }
+        
+        /* Background pattern */
+        .bg-pattern {
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(139, 0, 0, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(26, 58, 108, 0.05) 0%, transparent 20%);
+            background-size: 50px 50px;
+        }
+        
+        /* Ribbon effect for status */
+        .status-ribbon {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .status-ribbon::before {
+            content: 'VALID';
+            position: absolute;
+            top: -10px;
+            right: -30px;
+            width: 100px;
+            height: 30px;
+            background: #10b981;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+    
+    <!-- Animated Background Elements -->
+    <div class="fixed inset-0 overflow-hidden z-0">
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-red-900 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-900 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" style="animation-delay: 1s"></div>
+    </div>
+    
+    <div class="w-full max-w-6xl mx-auto z-10">
+        <div class="text-center mb-10">
+            <h1 class="glow-title text-5xl font-bold text-white mb-4 font-cinzel">3D Educator Certificate Generator</h1>
+            <p class="text-gray-300 text-lg max-w-2xl mx-auto">Create a stunning, realistic 3D certificate for Texas educators with unique design effects</p>
+        </div>
+
+        <!-- Controls -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-8 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div>
+                    <label for="teacherName" class="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                        <i class="fas fa-user-graduate mr-2 text-blue-600"></i> Educator's Full Name
+                    </label>
+                    <input type="text" id="teacherName" value="Jasmine Oviedo" class="w-full input-3d bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3">
+                </div>
+                <div>
+                    <label for="effectiveDate" class="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                        <i class="fas fa-calendar-check mr-2 text-green-600"></i> Effective Date
+                    </label>
+                    <input type="date" id="effectiveDate" value="2025-01-16" min="2025-01-01" max="2029-12-31" class="w-full input-3d bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3">
+                </div>
+                <div>
+                    <label for="expirationDate" class="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                        <i class="fas fa-calendar-times mr-2 text-red-600"></i> Expiration Date
+                    </label>
+                    <input type="date" id="expirationDate" value="2029-05-31" min="2025-01-01" max="2029-12-31" class="w-full input-3d bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3">
+                </div>
+                <div>
+                    <label for="certType" class="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                        <i class="fas fa-award mr-2 text-yellow-600"></i> Certificate Type
+                    </label>
+                    <select id="certType" class="w-full input-3d bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3">
+                        <option selected>Standard Certificate</option>
+                        <option>Provisional Certificate</option>
+                        <option>Professional Certificate</option>
+                        <option>Master Teacher Certificate</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-2">
+                <button id="randomizeBtn" class="btn-3d w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-bold py-3 px-8 rounded-lg transition duration-300 flex items-center justify-center">
+                    <i class="fas fa-random mr-3"></i> Randomize Subjects
+                </button>
+                <button id="downloadBtn" class="btn-3d w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 flex items-center justify-center">
+                    <i class="fas fa-download mr-3"></i> Download Certificate
+                </button>
+                <button id="rotateBtn" class="btn-3d w-full sm:w-auto bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 flex items-center justify-center">
+                    <i class="fas fa-sync-alt mr-3"></i> Rotate 3D View
+                </button>
+            </div>
+        </div>
+
+        <!-- Certificate Preview -->
+        <div class="relative flex justify-center items-center mb-12">
+            <div id="certificate" class="certificate-3d w-full aspect-[11/8.5] max-w-4xl mx-auto bg-white p-10 relative overflow-hidden cert-font bg-pattern">
+                <!-- Shimmer effect -->
+                <div class="shimmer"></div>
+                
+                <!-- Background particles -->
+                <div class="particles" id="particles-container"></div>
+                
+                <!-- Golden seal -->
+                <div class="golden-seal">
+                    <div class="absolute w-12 h-12 bg-red-800 rounded-full opacity-60"></div>
+                    <div class="absolute w-8 h-8 bg-white rounded-full"></div>
+                </div>
+                
+                <!-- Certificate content -->
+                <div class="relative z-10 h-full flex flex-col text-center">
+                    <!-- Ornamental header -->
+                    <div class="flex justify-center items-center mb-6">
+                        <div class="h-1 w-20 bg-red-800"></div>
+                        <div class="mx-4">
+                            <i class="fas fa-star text-red-800 text-2xl"></i>
+                            <i class="fas fa-star text-blue-900 text-3xl mx-6"></i>
+                            <i class="fas fa-star text-red-800 text-2xl"></i>
+                        </div>
+                        <div class="h-1 w-20 bg-blue-900"></div>
+                    </div>
+                    
+                    <h1 class="cert-title text-4xl font-bold mb-6 embossed tracking-wider">TEXAS EDUCATOR CERTIFICATE</h1>
+                    
+                    <p class="mb-6 text-gray-700 text-lg">This certifies that</p>
+                    <h2 id="certName" class="cert-name text-5xl text-blue-900 mb-8 embossed tracking-wider border-b-2 border-red-800 pb-4 inline-block px-10">Jasmine Oviedo</h2>
+                    
+                    <p class="max-w-2xl mx-auto text-base mb-8 text-gray-800 leading-relaxed">
+                        has fulfilled requirements of state law and regulations of the 
+                        <span class="font-semibold text-red-800">State Board for Educator Certification</span>
+                        and is hereby authorized to perform duties as designated below:
+                    </p>
+
+                    <!-- Subjects table -->
+                    <div class="border-y-2 border-gray-800 my-6 py-4 px-2 text-sm font-bold grid grid-cols-10 gap-2 bg-gradient-to-r from-gray-50 to-gray-100">
+                        <div class="col-span-4 text-left pl-6">Description</div>
+                        <div class="col-span-2">Effective Date</div>
+                        <div class="col-span-2">Expiration Date</div>
+                        <div class="col-span-2">Status</div>
+                    </div>
+
+                    <div id="certSubjects" class="text-sm flex-grow">
+                        <!-- Dynamic content here -->
+                    </div>
+
+                    <div class="mt-auto pt-8 text-center">
+                        <div class="flex justify-center items-center mb-4">
+                            <div class="h-px w-32 bg-gray-800"></div>
+                            <div class="mx-4">
+                                <i class="fas fa-seal text-red-800 text-3xl"></i>
+                            </div>
+                            <div class="h-px w-32 bg-gray-800"></div>
+                        </div>
+                        <p class="font-bold text-xl text-gray-900 tracking-wider">STANDARD CERTIFICATE</p>
+                        <p id="certOfficialDate" class="text-sm mt-4 text-gray-700">Official Record of Certification</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3D Rotation Guide -->
+            <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-black/70 text-white text-xs py-2 px-4 rounded-lg">
+                <i class="fas fa-mouse-pointer mr-2"></i> Hover to adjust 3D perspective | Click "Rotate 3D View" for more angles
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const teacherNameInput = document.getElementById('teacherName');
+        const effectiveDateInput = document.getElementById('effectiveDate');
+        const expirationDateInput = document.getElementById('expirationDate');
+        const certTypeSelect = document.getElementById('certType');
+        const randomizeBtn = document.getElementById('randomizeBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const rotateBtn = document.getElementById('rotateBtn');
+        const certificateElement = document.getElementById('certificate');
+        
+        // Certificate Fields
+        const certName = document.getElementById('certName');
+        const certSubjects = document.getElementById('certSubjects');
+        const certOfficialDate = document.getElementById('certOfficialDate');
+
+        const allSubjects = [
+            { name: "Physical Education", grades: "Grades (EC-12)" },
+            { name: "Art", grades: "Grades (EC-12)" },
+            { name: "Music", grades: "Grades (EC-12)" },
+            { name: "History", grades: "Grades (7-12)" },
+            { name: "Mathematics", grades: "Grades (7-12)" },
+            { name: "English Language Arts and Reading", grades: "Grades (4-8)" },
+            { name: "Science", grades: "Grades (7-12)" },
+            { name: "Core Subjects", grades: "Grades (EC-6)" },
+            { name: "Special Education", grades: "Grades (EC-12)" },
+            { name: "Technology Applications", grades: "Grades (EC-12)" },
+            { name: "Spanish", grades: "Grades (EC-12)" },
+            { name: "Theatre", grades: "Grades (EC-12)" },
+            { name: "Health Science", grades: "Grades (6-12)" },
+            { name: "Journalism", grades: "Grades (7-12)" },
+        ];
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles-container');
+            const particleCount = 25;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 2px and 10px
+                const size = Math.random() * 8 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random color (red or blue tint)
+                const colors = ['rgba(139, 0, 0, 0.15)', 'rgba(26, 58, 108, 0.15)'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Random animation delay and duration
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.animationDuration = `${15 + Math.random() * 10}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            const date = new Date(dateString);
+            // Compensate for timezone issues by working in UTC
+            const utcDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+            return utcDate.toLocaleDateString('en-US', options);
+        }
+
+        // Format official date with styling
+        function formatOfficialDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const now = new Date();
+            return `Official Record of Certification<br><span class="font-bold text-red-800">${now.toLocaleDateString('en-US', options)}</span>`;
+        }
+
+        // Update certificate with current values
+        function updateCertificate() {
+            certName.textContent = teacherNameInput.value || ' ';
+            certOfficialDate.innerHTML = formatOfficialDate();
+            // Subjects are updated on randomize, but dates inside need to be refreshed
+            randomizeSubjects(true); // pass true to keep existing subjects
+            
+            // Add subtle animation to name update
+            certName.style.transform = 'scale(1.05)';
+            certName.style.transition = 'transform 0.3s ease';
+            setTimeout(() => {
+                certName.style.transform = 'scale(1)';
+            }, 300);
+        }
+
+        let currentSubjects = [];
+        let rotationAngle = 0;
+
+        // Randomize subjects (with optional parameter to keep existing subjects)
+        function randomizeSubjects(keepSubjects = false) {
+            if (!keepSubjects) {
+                const shuffled = [...allSubjects].sort(() => 0.5 - Math.random());
+                // Pick 1 to 3 subjects
+                const subjectCount = Math.floor(Math.random() * 3) + 1;
+                currentSubjects = shuffled.slice(0, subjectCount);
+            }
+            
+            certSubjects.innerHTML = ''; // Clear previous entries
+
+            // Static "Classroom Teacher" row
+            const classroomTeacherRow = document.createElement('div');
+            classroomTeacherRow.className = "grid grid-cols-10 gap-2 mb-4 p-3 hover:bg-gray-50 transition-colors duration-200 rounded-lg";
+            classroomTeacherRow.innerHTML = `
+                <div class="col-span-4 text-left pl-6 font-semibold text-blue-900">
+                    <p>Classroom Teacher</p>
+                    <p class="text-xs text-gray-600">General Classroom Instruction</p>
+                </div>
+                <div class="col-span-2 flex items-center justify-center">
+                    <div class="bg-gray-100 px-3 py-1 rounded-md">${formatDate(effectiveDateInput.value)}</div>
+                </div>
+                <div class="col-span-2 flex items-center justify-center">
+                    <div class="bg-gray-100 px-3 py-1 rounded-md">${formatDate(expirationDateInput.value)}</div>
+                </div>
+                <div class="col-span-2 flex items-center justify-center">
+                    <div class="status-ribbon bg-green-100 text-green-800 font-bold px-4 py-2 rounded-md relative overflow-hidden">
+                        Valid
+                    </div>
+                </div>
+            `;
+            certSubjects.appendChild(classroomTeacherRow);
+
+            const effective = formatDate(effectiveDateInput.value);
+            const expiration = formatDate(expirationDateInput.value);
+
+            currentSubjects.forEach((subject, index) => {
+                const row = document.createElement('div');
+                row.className = `grid grid-cols-10 gap-2 mb-4 p-3 hover:bg-gray-50 transition-colors duration-200 rounded-lg ${index % 2 === 0 ? 'bg-gray-50/50' : ''}`;
+                row.innerHTML = `
+                    <div class="col-span-4 text-left pl-6">
+                        <p class="font-semibold text-gray-900">${subject.name}</p>
+                        <p class="text-xs text-gray-600">${subject.grades}</p>
+                    </div>
+                    <div class="col-span-2 flex items-center justify-center">
+                        <div class="bg-gray-100 px-3 py-1 rounded-md shadow-sm">${effective}</div>
+                    </div>
+                    <div class="col-span-2 flex items-center justify-center">
+                        <div class="bg-gray-100 px-3 py-1 rounded-md shadow-sm">${expiration}</div>
+                    </div>
+                    <div class="col-span-2 flex items-center justify-center">
+                        <div class="status-ribbon bg-green-100 text-green-800 font-bold px-4 py-2 rounded-md relative overflow-hidden">
+                            Valid
+                        </div>
+                    </div>
+                `;
+                certSubjects.appendChild(row);
+            });
+            
+            // Add animation effect to new rows
+            const rows = certSubjects.querySelectorAll('div');
+            rows.forEach((row, i) => {
+                row.style.opacity = '0';
+                row.style.transform = 'translateY(10px)';
+                row.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateY(0)';
+                }, i * 100);
+            });
+        }
+
+        // Rotate 3D view
+        function rotate3DView() {
+            rotationAngle += 90;
+            if (rotationAngle >= 360) rotationAngle = 0;
+            
+            let rotateY = 0;
+            let rotateX = 0;
+            
+            switch(rotationAngle) {
+                case 0:
+                    rotateY = -5;
+                    rotateX = 3;
+                    break;
+                case 90:
+                    rotateY = 5;
+                    rotateX = 3;
+                    break;
+                case 180:
+                    rotateY = 5;
+                    rotateX = -3;
+                    break;
+                case 270:
+                    rotateY = -5;
+                    rotateX = -3;
+                    break;
+            }
+            
+            certificateElement.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+            
+            // Add rotation animation class
+            certificateElement.classList.add('rotating');
+            setTimeout(() => {
+                certificateElement.classList.remove('rotating');
+            }, 800);
+            
+            // Update button text
+            const angles = ["Front View", "Right View", "Back View", "Left View"];
+            rotateBtn.innerHTML = `<i class="fas fa-sync-alt mr-3"></i> ${angles[rotationAngle/90]}`;
+        }
+
+        // Event Listeners
+        teacherNameInput.addEventListener('input', updateCertificate);
+        effectiveDateInput.addEventListener('change', updateCertificate);
+        expirationDateInput.addEventListener('change', updateCertificate);
+        certTypeSelect.addEventListener('change', updateCertificate);
+        
+        randomizeBtn.addEventListener('click', () => {
+            // Add button animation
+            randomizeBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                randomizeBtn.style.transform = 'scale(1)';
+            }, 150);
+            
+            randomizeSubjects(false); // Generate new subjects
+        });
+
+        rotateBtn.addEventListener('click', rotate3DView);
+
+        downloadBtn.addEventListener('click', () => {
+            // Add button animation
+            downloadBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                downloadBtn.style.transform = 'scale(1)';
+            }, 150);
+            
+            // Reset 3D transform for clean capture
+            const originalTransform = certificateElement.style.transform;
+            const originalBoxShadow = certificateElement.style.boxShadow;
+            
+            certificateElement.style.transform = 'rotateY(0) rotateX(0)';
+            certificateElement.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+            
+            // Brief pause to allow rendering
+            setTimeout(() => {
+                html2canvas(certificateElement, { 
+                    scale: 2.5,
+                    backgroundColor: null,
+                    useCORS: true
+                }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `texas-educator-certificate-${teacherNameInput.value.replace(/\s+/g, '-').toLowerCase()}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    
+                    // Restore original 3D style
+                    certificateElement.style.transform = originalTransform;
+                    certificateElement.style.boxShadow = originalBoxShadow;
+                    
+                    // Show success message
+                    const originalText = downloadBtn.innerHTML;
+                    downloadBtn.innerHTML = '<i class="fas fa-check mr-3"></i> Downloaded!';
+                    downloadBtn.classList.remove('bg-gradient-to-r', 'from-emerald-500', 'to-green-600');
+                    downloadBtn.classList.add('bg-gradient-to-r', 'from-green-500', 'to-emerald-600');
+                    
+                    setTimeout(() => {
+                        downloadBtn.innerHTML = originalText;
+                        downloadBtn.classList.remove('bg-gradient-to-r', 'from-green-500', 'to-emerald-600');
+                        downloadBtn.classList.add('bg-gradient-to-r', 'from-emerald-500', 'to-green-600');
+                    }, 2000);
+                    
+                }).catch(err => {
+                    console.error("Oops, something went wrong!", err);
+                    certificateElement.style.transform = originalTransform;
+                    certificateElement.style.boxShadow = originalBoxShadow;
+                    
+                    // Show error message
+                    const originalText = downloadBtn.innerHTML;
+                    downloadBtn.innerHTML = '<i class="fas fa-exclamation-triangle mr-3"></i> Error!';
+                    downloadBtn.classList.remove('bg-gradient-to-r', 'from-emerald-500', 'to-green-600');
+                    downloadBtn.classList.add('bg-gradient-to-r', 'from-red-500', 'to-red-600');
+                    
+                    setTimeout(() => {
+                        downloadBtn.innerHTML = originalText;
+                        downloadBtn.classList.remove('bg-gradient-to-r', 'from-red-500', 'to-red-600');
+                        downloadBtn.classList.add('bg-gradient-to-r', 'from-emerald-500', 'to-green-600');
+                    }, 2000);
+                });
+            }, 100);
+        });
+
+        // Initialize particles and certificate
+        createParticles();
+        updateCertificate();
+        
+        // Add interactive mouse effects
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+            
+            // Only apply if certificate is in default rotation
+            if (rotationAngle === 0) {
+                certificateElement.style.transform = `rotateY(${-5 - xAxis}deg) rotateX(${3 + yAxis}deg)`;
+            }
+        });
+    </script>
+</body>
+</html><script>try{
+// JavaScript here
+console.log('Abdullah Coded HTML Previewer ready');
+
+// Example interactive functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Add click effect to list items
+  const listItems = document.querySelectorAll('li');
+  listItems.forEach(item => {
+    item.addEventListener('click', function() {
+      this.style.backgroundColor = '#e1f5fe';
+      setTimeout(() => {
+        this.style.backgroundColor = '';
+      }, 300);
+    });
+  });
+  
+  // Update title dynamically
+  const title = document.querySelector('h1');
+  if (title) {
+    title.addEventListener('mouseenter', function() {
+      this.style.color = '#00BCD4';
+    });
+    title.addEventListener('mouseleave', function() {
+      this.style.color = '#2196F3';
+    });
+  }
+});
+}catch(e){parent.postMessage({type:'preview-error',message:e.message}, '*');}
+</script></body></html>
